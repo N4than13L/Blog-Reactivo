@@ -16,7 +16,8 @@ const puerto = 3900;
 app.use(cors());
 
 // 6. Convertir body a objeto Js.
-app.use(express.json());
+app.use(express.json()); // Para recibir datos en content-type app/json.
+app.use(express.urlencoded({ extended: true })); // Para recibir datos de formulario normal.
 
 // 7. Rutas.
 // req: request, res: response.
