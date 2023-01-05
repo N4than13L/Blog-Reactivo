@@ -1,6 +1,6 @@
-// 1. Importar validator y el modelo.
-const validator = require("validator");
+// 1. Importar validator, modelo y helpers.
 const Articulo = require("../modelos/Articulo");
+const { validar_Articulo } = require("../helpers/validarArticulo");
 
 // 2. Crear metodos de prueba y los metodos correspondietes al API.
 const prueba = (req, res) => {
@@ -26,23 +26,12 @@ const crear = (req, res) => {
 
   // 2. Validar datos.
   try {
+    validar_Articulo(parametros);
   } catch (error) {
     return res.status(404).send({
       status: "error",
       mensaje: "Error al guardar la informacion",
     });
-  }
-
-  let validar_titulo =
-    !validator.isEmpty(parametros.titulo) &&
-    validator.isLength(parametros.titulo, { min: 5, max: undefined });
-
-  let validar_contenido = !validator.isEmpty(parametros.contenido);
-
-  if (!validar_titulo || !validar_contenido) {
-    throw new Error(
-      "Datos estan vacios favor de entrar la informcion adecuadamente"
-    );
   }
 
   // 3. Crear el objeto a guardar.
@@ -113,7 +102,73 @@ const uno = (req, res) => {
   });
 };
 
-const borrar = (req, res) => {};
+const borrar = (req, res) => {
+  // 1. recoger parametro por id.
+  let articulo_id = req.params.id;
+  let parametros = req.body;
+
+  // 2. usar el modelo para eliminar el articulo.
+  Articulo.findByIdAndDelete(
+    { _id: articulo_id },
+    (error, articulo_borrado) => {
+      // cuando no se halla indicado el resultado es negativo.
+      if (error || !articulo_borrado) {
+        return res.status(500).send({
+          status: "error",
+          mensaje: "Error al borrar dicho articulo.",
+        });
+      }
+
+      // si todo va bien se da un resultado positivo.
+      res.status(200).json({
+        status: "success",
+        mensaje: "articulo borrado con exito",
+        articulo: articulo_borrado,
+      });
+    }
+  );
+};
+
+const editar = (req, res) => {
+  // recoger el parametro id por url.
+  let articulo_id = req.params.id;
+
+  // recoger parametros por el body.
+  let parametros = req.body;
+
+  // validar informacion.
+  try {
+    validar_Articulo(parametros);
+  } catch (error) {
+    return res.status(400).send({
+      status: "error",
+      mensaje: "Error al actualizar",
+    });
+  }
+
+  // buscar y actualizar articulo.
+  Articulo.findByIdAndUpdate(
+    { _id: articulo_id },
+    req.body,
+    { new: true },
+    (error, articulo_actualizado) => {
+      // cuando de error o no se ecuentre el articulo.
+      if (error || !articulo_actualizado) {
+        res.status(500).json({
+          status: "error",
+          mensaje: "articulo no encontrado o no existe",
+        });
+      }
+
+      // devolver un resultado positivo cuando todo valla bien.
+      res.status(200).json({
+        status: "success",
+        mensaje: "articulo actualizado con exito.",
+        articulo: articulo_actualizado,
+      });
+    }
+  );
+};
 
 // 3. Exportar los metodos.
 module.exports = {
@@ -123,4 +178,5 @@ module.exports = {
   listar,
   uno,
   borrar,
+  editar,
 };
