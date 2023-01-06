@@ -1,6 +1,7 @@
 // 1. Importar validator, modelo y helpers.
 const Articulo = require("../modelos/Articulo");
 const { validar_Articulo } = require("../helpers/validarArticulo");
+const fs = require("fs");
 
 // 2. Crear metodos de prueba y los metodos correspondietes al API.
 const prueba = (req, res) => {
@@ -170,6 +171,48 @@ const editar = (req, res) => {
   );
 };
 
+const subir = (req, res) => {
+  // 1. configurar multer.
+
+  // 2. recoger fichero de la imagen subida.
+  // if (!req.file || !req.files) {
+  //   res.status(400).json({
+  //     status: "error",
+  //     mensaje: "error en la peticion",
+  //   });
+  // }
+
+  // 3. nombre de la imagen.
+  let archivo = req.file.originalname;
+
+  // 4. extencion del archivo.
+  let archivo_split = archivo.split(".");
+  let extencion = archivo_split[1];
+
+  // 5. comprobar la extencion correcta.
+  if (
+    extencion != "jpg" &&
+    extencion != "png" &&
+    extencion != "gif" &&
+    extencion != "jpeg"
+  ) {
+    // borrar el archivo y dar respuesta.
+
+    fs.unlink(req.file.path, (error) => {
+      res.status(400).send({
+        status: "success",
+        mensaje: "el formato no es valido",
+      });
+    });
+  } else {
+    // devolver un resultado positivo cuando todo valla bien.
+    res.status(200).json({
+      status: "success",
+      file: req.file,
+    });
+  }
+};
+
 // 3. Exportar los metodos.
 module.exports = {
   prueba,
@@ -179,4 +222,5 @@ module.exports = {
   uno,
   borrar,
   editar,
+  subir,
 };
