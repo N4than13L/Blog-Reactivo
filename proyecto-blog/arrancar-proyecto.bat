@@ -1,0 +1,5 @@
+start cmd.exe /k "cd C:\Program Files\MongoDB\Server\6.0\bin && mongod.exe --dbpath C:\data\db"
+start cmd.exe /k "cd C:\wamp64\www\MERN-Stack\Api-Rest-Node && npm start"
+start cmd.exe /k "cd C:\wamp64\www\MERN-Stack\proyecto-blog && npm run dev"
+@REM start "C:\Users\Nathaniel\AppData\Local\MongoDBCompass\MongoDBCompass.exe"
+@REM start "C:\Users\Nathaniel\AppData\Local\Postman\Postman.exe"
