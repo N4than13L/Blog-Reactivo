@@ -1,5 +1,6 @@
 // 1. Importar validator, modelo y helpers.
 const Articulo = require("../modelos/Articulo");
+const path = require("path");
 const { validar_Articulo } = require("../helpers/validarArticulo");
 const fs = require("fs");
 
@@ -205,12 +206,77 @@ const subir = (req, res) => {
       });
     });
   } else {
-    // devolver un resultado positivo cuando todo valla bien.
-    res.status(200).json({
-      status: "success",
-      file: req.file,
-    });
+    // parte para editar una imagen. se recoge el parametro id por url.
+    let articulo_id = req.params.id;
+
+    // buscar y actualizar articulo.
+    Articulo.findByIdAndUpdate(
+      { _id: articulo_id },
+      { imagen: req.file.filename },
+      { new: true },
+      (error, articulo_actualizado) => {
+        // cuando de error o no se ecuentre el articulo.
+        if (error || !articulo_actualizado) {
+          res.status(500).json({
+            status: "error",
+            mensaje: "articulo no encontrado o no existe",
+          });
+        }
+
+        // devolver un resultado positivo cuando todo valla bien.
+        res.status(200).json({
+          status: "success",
+          mensaje: "articulo actualizado con exito.",
+          articulo: articulo_actualizado,
+          fichero: req.file,
+        });
+      }
+    );
   }
+};
+
+const imagen = (req, res) => {
+  let fichero = req.params.fichero;
+  let ruta_fisica = "./imagenes/articulo/" + fichero;
+
+  fs.stat(ruta_fisica, (error, existe) => {
+    if (existe) {
+      return res.sendFile(path.resolve(ruta_fisica));
+    } else {
+      res.status(404).json({
+        status: "error",
+        mensaje: "la imagen del articulo no existe",
+      });
+    }
+  });
+};
+
+const busqueda = (req, res) => {
+  // 1. Sacar el string de la busqueda.
+  let busqueda = req.params.busqueda;
+  // 2. hacer el findOr y sacarlo por orden de fecha.
+  Articulo.find({
+    $or: [
+      { titulo: { $regex: busqueda, $options: "i" } },
+      { contenido: { $regex: busqueda, $options: "i" } },
+    ],
+  })
+    .sort({ fecha: -1 })
+    .exec((error, articulo_encontrado) => {
+      if (error || !articulo_encontrado || articulo_encontrado.length <= 0) {
+        res.status(404).json({
+          status: "error",
+          mensaje: "artiv=culo no encontrado",
+        });
+      }
+
+      return res.status(200).send({
+        status: "200",
+        articulo: articulo_encontrado,
+      });
+    });
+  // 4. Ejecutar la consulta.
+  // 5. Devolver la consulta.
 };
 
 // 3. Exportar los metodos.
@@ -223,4 +289,6 @@ module.exports = {
   borrar,
   editar,
   subir,
+  imagen,
+  busqueda,
 };

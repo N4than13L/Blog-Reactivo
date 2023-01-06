@@ -37,5 +37,8 @@ router.post(
   ArticuloControlador.subir
 );
 
+router.get("/imagen/:fichero", ArticuloControlador.imagen);
+router.get("/busqueda/:busqueda", ArticuloControlador.busqueda);
+
 // 4. Exportar el articulo rutes.
 module.exports = router;
