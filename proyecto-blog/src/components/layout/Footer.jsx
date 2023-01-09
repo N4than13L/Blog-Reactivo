@@ -1,5 +1,10 @@
 import React from "react";
 
 export const Footer = () => {
-  return <div>Footer</div>;
+  return (
+    <footer className="footer">
+      &copy; Máster en React -{" "}
+      <a href="https://victorroblesweb.es">victorroblesweb.es</a>
+    </footer>
+  );
 };
