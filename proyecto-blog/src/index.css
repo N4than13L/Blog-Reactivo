@@ -158,7 +158,7 @@ input[type="button"] {
 .jumbo {
   width: 85px;
   padding: 55px;
-  background-color: white;
+  background-color: rgb(231, 231, 231);
   border-radius: 10px;
   box-shadow: 0px 0px 6px, #ddd;
   min-width: 800px;
@@ -197,12 +197,8 @@ input[type="button"] {
   box-shadow: 0px 0px 6px #ddd;
 }
 
-.lateral input[type="text"],
-.lateral input[type="text"],
-.lateral textarea,
-.edit_form input[type="text"],
-.edit_form input[type="text"],
-.edit_form textarea {
+input[type="text"],
+textarea {
   display: block;
   margin: 0 auto;
   margin-top: 15px;
@@ -210,10 +206,35 @@ input[type="button"] {
   border-radius: 5px;
   background: #f6f7f9;
   color: #454545;
-  width: 80%;
+  width: 100%;
   opacity: 4;
   outline: 0;
   border-color: transparent;
+}
+
+.form-group {
+  width: 40px;
+  margin: 0px auto;
+  align-items: center;
+  text-align: center;
+}
+
+.form-group label {
+  display: block;
+  text-align: left;
+  margin-bottom: 3px;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group input[type="file"] {
+  border: 1px solid #ccc;
+  outline: 0;
+  width: 200px;
+  margin-top: 0;
+  /* margin-right: -25px; */
+  margin-left: -30px;
+  margin-bottom: 10px;
 }
 
 .edit_form {
