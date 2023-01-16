@@ -1,4 +1,9 @@
-export const Peticion = async (url, metodo, datos_guardar = "") => {
+export const Peticion = async (
+  url,
+  metodo,
+  datos_guardar = "",
+  archivos = false
+) => {
   let cargando = true;
 
   let opciones = {
@@ -12,13 +17,22 @@ export const Peticion = async (url, metodo, datos_guardar = "") => {
   }
 
   if (metodo == "POST" || metodo == "PUT") {
-    opciones = {
-      method: "POST",
-      body: JSON.stringify(datos_guardar),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    let body = JSON.stringify(datos_guardar);
+
+    if (archivos) {
+      opciones = {
+        method: "POST",
+        body: datos_guardar,
+      };
+    } else {
+      opciones = {
+        method: "POST",
+        body: JSON.stringify(datos_guardar),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+    }
   }
 
   const peticion = await fetch(url, opciones);
