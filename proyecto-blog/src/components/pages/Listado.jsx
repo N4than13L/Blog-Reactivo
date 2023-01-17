@@ -1,9 +1,19 @@
 import React from "react";
 import { global } from "../../helpers/global";
+import { Peticion } from "../../helpers/Peticion";
+import { Link } from "react-router-dom";
 
 export const Listado = ({ articulos, setArticulos }) => {
-  const eliminar = (id) => {
-    alert(id);
+  const eliminar = async (id) => {
+    let { datos } = await Peticion(global.url + "articulo/" + id, "DELETE");
+    console.log(datos);
+
+    if (datos.status === "success") {
+      let articulo_actualizado = articulos.filter(
+        (articulo) => articulo._id !== id
+      );
+      setArticulos(articulo_actualizado);
+    }
   };
   return articulos.map((articulo) => {
     return (
@@ -19,12 +29,15 @@ export const Listado = ({ articulos, setArticulos }) => {
         </div>
         <div className="datos">
           <h3 className="title">{articulo.titulo}</h3>
-          <p className="description">{articulo.contenido}</p>
+          <p className="description">
+            {" "}
+            <Link to={"/articulo/" + articulo._id}>{articulo.contenido}</Link>
+          </p>
           <button className="edit">Editar</button>
           <button
             className="delete"
             onClick={() => {
-              eliminar(articulos.id);
+              eliminar(articulo._id);
             }}
           >
             Borrar

@@ -266,17 +266,16 @@ const busqueda = (req, res) => {
       if (error || !articulo_encontrado || articulo_encontrado.length <= 0) {
         res.status(404).json({
           status: "error",
-          mensaje: "artiv=culo no encontrado",
+          mensaje: "articulo no encontrado",
         });
       }
 
+      // 5. Devolver la consulta.
       return res.status(200).send({
-        status: "200",
+        status: "success",
         articulo: articulo_encontrado,
       });
     });
-  // 4. Ejecutar la consulta.
-  // 5. Devolver la consulta.
 };
 
 // 3. Exportar los metodos.

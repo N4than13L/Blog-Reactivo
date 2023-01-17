@@ -124,7 +124,13 @@ body {
 }
 
 .articulo-item h3 {
-  font-size: 25px;
+  font-size: 30px;
+}
+
+.articulo-item h3 a {
+  font-size: 30px;
+  text-decoration: none;
+  color: #454545;
 }
 
 .button,
