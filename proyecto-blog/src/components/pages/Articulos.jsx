@@ -17,8 +17,6 @@ export const Articulos = () => {
 
   // 4. hacer la funcion correspondiente para conseguir los datos del api.
   const conseguir_articulos = async () => {
-    // obtener la url.
-
     // console.log(await Peticion(global.url + "articulos", "GET"));
     const { datos, cargando } = await Peticion(global.url + "articulos", "GET");
 

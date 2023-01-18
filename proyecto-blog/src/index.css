@@ -19,6 +19,7 @@ body {
     "content content content lateral"
     "footer footer footer footer";
   grid-template-rows: 100px 70px auto 70px;
+  grid-template-columns: 1fr 1fr 1fr 25%;
 }
 
 /*ESTILOS CABECERA*/
@@ -136,7 +137,8 @@ body {
 .button,
 button,
 input[type="submit"],
-input[type="button"] {
+input[type="button"],
+.edit {
   text-decoration: none;
   width: 100px;
   background: #0b70e1;
@@ -145,7 +147,8 @@ input[type="button"] {
   outline: 0;
   padding: 15px;
   border-radius: 3px;
-  margin-top: 15px;
+  margin-top: 0px;
+  margin-bottom: 25px;
   text-transform: capitalize;
   font-size: 16px;
   font-weight: 500;

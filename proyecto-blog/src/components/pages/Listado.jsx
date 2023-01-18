@@ -28,12 +28,13 @@ export const Listado = ({ articulos, setArticulos }) => {
           )}
         </div>
         <div className="datos">
-          <h3 className="title">{articulo.titulo}</h3>
-          <p className="description">
-            {" "}
-            <Link to={"/articulo/" + articulo._id}>{articulo.contenido}</Link>
-          </p>
-          <button className="edit">Editar</button>
+          <Link to={"/articulo/" + articulo._id}>
+            <h3 className="title">{articulo.titulo}</h3>
+          </Link>
+          <p className="description"> {articulo.contenido}</p>
+          <Link to={"/editar/" + articulo._id} className="edit">
+            Editar
+          </Link>
           <button
             className="delete"
             onClick={() => {

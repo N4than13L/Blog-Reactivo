@@ -35,7 +35,7 @@ export const Crear = () => {
 
       const subida = await Peticion(
         global.url + "subir-imagen/" + datos.articulo._id,
-        "POST",
+        "PUT",
         formData,
         true
       );

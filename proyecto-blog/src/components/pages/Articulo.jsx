@@ -28,9 +28,7 @@ export const Articulo = () => {
     if (datos.status === "success") {
       setArticulo(datos.articulo);
     }
-
     setCargando(false);
-    console.log(articulo);
   };
 
   return (

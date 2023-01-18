@@ -11,6 +11,7 @@ import { Footer } from "../layout/Footer";
 import { Crear } from "../pages/Crear";
 import { Busqueda } from "../pages/Busqueda";
 import { Articulo } from "../pages/Articulo";
+import { Editar } from "../pages/editar";
 
 export const Rutas = () => {
   return (
@@ -28,6 +29,7 @@ export const Rutas = () => {
           <Route path="/crear-articulo" element={<Crear />} />
           <Route path="/buscar/:busqueda" element={<Busqueda />} />
           <Route path="/articulo/:id" element={<Articulo />} />
+          <Route path="/editar/:id" element={<Editar />} />
 
           {/* ruta 404 */}
           <Route
