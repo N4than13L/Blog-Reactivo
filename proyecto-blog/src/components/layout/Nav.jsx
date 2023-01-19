@@ -14,9 +14,6 @@ export const Nav = () => {
         <li>
           <NavLink to="/crear-articulo">Crear articulo</NavLink>
         </li>
-        <li>
-          <NavLink to="/">Contacto</NavLink>
-        </li>
       </ul>
     </nav>
   );
