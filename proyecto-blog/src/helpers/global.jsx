@@ -1,3 +1,3 @@
 export const global = {
-  url: "https://blog-reactivo-api.vercel.app/",
+  url: "https://blog-reactivo-api.vercel.app/api",
 };
