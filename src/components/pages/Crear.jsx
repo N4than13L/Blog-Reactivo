@@ -28,10 +28,10 @@ export const Crear = () => {
 
     const fileInput = document.querySelector("#file");
 
-    if (datos.status === "success" && fileInput.files[0]) {
+    if (datos.status === "success") {
       // subir la imagen.
       const formData = new FormData();
-      formData.append("file0", fileInput.files[0]);
+      formData.append("file0");
 
       const subida = await Peticion(
         global.url + "subir-imagen/" + datos.articulo._id,
@@ -58,10 +58,11 @@ export const Crear = () => {
       </strong>
 
       {/* Montar el formulario */}
-      <form className="formulario" onSubmit={guardar_articulo}>
+      <form className="" onSubmit={guardar_articulo}>
         <div className="form-group">
           <label htmlFor="titulo">titulo</label>
           <input
+            className="form-control mb-3"
             type="text"
             name="titulo"
             placeholder="Titulo"
@@ -72,13 +73,14 @@ export const Crear = () => {
         <div className="form-group">
           <label htmlFor="contenido">contenido</label>
           <textarea
+            className="form-control mb-3"
             name="contenido"
             placeholder="Contenido"
             onChange={cambiado}
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group mb-3">
           <label htmlFor="imagen">imagen</label>
           <input type="file" name="file0" id="imagen" />
         </div>

@@ -3,7 +3,7 @@ import React from "react";
 export const Header = () => {
   return (
     //  Cabecera
-    <header className="header">
+    <header className="text-center">
       {/* <div className="logo">
         <div className="play"></div>
       </div> */}

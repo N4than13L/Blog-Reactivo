@@ -32,13 +32,13 @@ export const Articulo = () => {
   };
 
   return (
-    <div className="jumbo">
+    <div className="card m-4 col-md-4 ">
       {/* hacer la condicion ternaria (o de una sola linea) para recoger la informacion si la tiene el api y si no dar un mensaje de error. */}
       {cargando ? (
         "cargando..."
       ) : (
         <>
-          <div className="mascara">
+          <div className="col-md-4">
             {articulo.imagen != "default.png" && (
               <img src={global.url + "imagen/" + articulo.imagen} />
             )}
@@ -48,9 +48,11 @@ export const Articulo = () => {
             )}
           </div>
 
-          <h1>{articulo.titulo}</h1>
-          <span>{articulo.fecha}</span>
-          <p>{articulo.contenido}</p>
+          <article className="card-footer">
+            <h1>{articulo.titulo}</h1>
+            <p>{articulo.contenido}</p>
+            <span>{articulo.fecha}</span>
+          </article>
         </>
       )}
     </div>

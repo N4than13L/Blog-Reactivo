@@ -28,7 +28,7 @@ export const Articulos = () => {
   };
 
   return (
-    <>
+    <div className="col-md-4">
       {/* hacer la condicion ternaria (o de una sola linea) para recoger la informacion si la tiene el api y si no dar un mensaje de error. */}
       {cargando ? "cargando..." : ""}
       {articulos.length >= 1 ? (
@@ -36,6 +36,6 @@ export const Articulos = () => {
       ) : (
         <h1>Errror 404 no hay articulos.</h1>
       )}
-    </>
+    </div>
   );
 };

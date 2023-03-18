@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 
 export const Inicio = () => {
   return (
-    <div className="jumbo">
-      <h1>Bienbenido al blog con react</h1>
-      <p>Blog desarrollado con MERN Stack (MongoDB, Express, React, NodeJs)</p>
+    <div className="card mt-2">
+      <h1 className="text-center">Bienbenido al blog con react</h1>
+      <p className="text-center">
+        Blog desarrollado con MERN Stack (MongoDB, Express, React, NodeJs)
+      </p>
 
-      <Link className="button" to="/articulos">
+      <Link className="btn btn-primary" to="/articulos">
         Ver articulos.
       </Link>
     </div>

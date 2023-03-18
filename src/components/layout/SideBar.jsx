@@ -12,12 +12,17 @@ export const SideBar = () => {
   };
 
   return (
-    <aside className="lateral">
+    <aside className="card text-center mt-3 p-2 container">
       <div className="search">
         <h3 className="title">Buscador</h3>
-        <form onSubmit={hacerBusqueda}>
-          <input type="text" name="search_field" />
-          <input type="submit" id="search" value="Buscar" />
+        <form className="input-group mb-3" onSubmit={hacerBusqueda}>
+          <input className="form-control" type="text" name="search_field" />
+          <input
+            className="btn btn-success"
+            type="submit"
+            id="search"
+            value="Buscar"
+          />
         </form>
       </div>
 

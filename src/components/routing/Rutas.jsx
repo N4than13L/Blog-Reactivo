@@ -19,9 +19,10 @@ export const Rutas = () => {
       {/* Layout */}
       <Header />
       <Nav />
-
+      {/* comentando el componente de busqueda */}
+      {/* <SideBar /> */}
       {/* Contenido */}
-      <section id="content" className="content">
+      <section id="content" className="container">
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/inicio" element={<Inicio />} />
@@ -42,7 +43,6 @@ export const Rutas = () => {
           />
         </Routes>
       </section>
-      <SideBar />
       <Footer />
     </BrowserRouter>
   );

@@ -17,8 +17,8 @@ export const Listado = ({ articulos, setArticulos }) => {
   };
   return articulos.map((articulo) => {
     return (
-      <article key={articulo._id} className="articulo-item">
-        <div className="mascara">
+      <article key={articulo._id} className="card m-3 text-center p-2">
+        <div>
           {articulo.imagen != "default.png" && (
             <img src={global.url + "imagen/" + articulo.imagen} />
           )}
@@ -27,16 +27,17 @@ export const Listado = ({ articulos, setArticulos }) => {
             <img src="https://thednetworks.com/wp-content/uploads/2012/01/picture_not_available_400-300.png" />
           )}
         </div>
-        <div className="datos">
+        <div className="">
           <Link to={"/articulo/" + articulo._id}>
-            <h3 className="title">{articulo.titulo}</h3>
+            <h3 className="fs-3">{articulo.titulo}</h3>
           </Link>
-          <p className="description"> {articulo.contenido}</p>
-          {/* <Link to={"/editar/" + articulo._id} className="edit">
+          <p className="fs-3"> {articulo.contenido}</p>
+          {/* <Link className="btn btn-warning" to={"/editar/" + articulo._id}>
             Editar
           </Link> */}
+
           <button
-            className="delete"
+            className="btn btn-danger"
             onClick={() => {
               eliminar(articulo._id);
             }}
